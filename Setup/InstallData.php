@@ -32,7 +32,7 @@ class InstallData implements InstallDataInterface
                 "backend"  => "",
                 "label"    => "Is Vendor?",
                 "input"    => "select",
-                "source"   => "Amitshree\Marketplace\Model\Config\Source\Options",
+                "source"   => "Amitshree\Marketplace\Model\Config\Source\IsVendorOptions",
                 "visible"  => true,
                 "required" => false,
                 "default" => "0",

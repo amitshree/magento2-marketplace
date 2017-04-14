@@ -1,0 +1,14 @@
+<?php
+/**
+ *  $block Amitshree\Marketplace\Block\Registration
+ */
+$isVendorDropdown = $block->getIsVendorHTML();
+?>
+<?php
+?>
+<div class="field is_vendor">
+    <label class="label" for="vendor"><span><?php echo __('Want to become a vendor?') ?></span></label>
+    <div class="control">
+        <?php echo $isVendorDropdown?>
+    </div>
+</div>
