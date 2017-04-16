@@ -17,8 +17,13 @@ class CustomerRepositoryInterface
                                $passwordHash = null)
     {
        
-        //todo:: disable account if applied as a vendor
+       /* $isVendor = $customerRepository->getById($customer->getId())->getCustomAttribute('is_vendor')->getValue();
 
+        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
+        $logger = new \Zend\Log\Logger();
+        $logger->addWriter($writer);
+        $logger->info('is vendor'. $isVendor);
+*/
         return [$customer, $passwordHash];
     }
 }
