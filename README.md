@@ -2,5 +2,9 @@ work in progress
 
 # magento2-marketplace
 
-Want to become a vendor on account creation page
-Account approval by Admin
+#### Features
+```
+Allow customer to register as a vendor
+Vendor account approval by Admin
+
+```
