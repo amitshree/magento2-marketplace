@@ -28,7 +28,6 @@ class Registration extends Template
      */
     public function getIsVendorHTML()
     {
-        //$isVendor = $this->isVendorOptions->getOptionArray();
         //todo:: create is vendor dropdown html
     }
 }

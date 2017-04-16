@@ -12,9 +12,9 @@ class IsVendorOptions extends \Magento\Eav\Model\Entity\Attribute\Source\Abstrac
     /**
      * Option values
      */
-    const VALUE_YES = 1;
 
     const VALUE_NO = 0;
+    const VALUE_YES = 1;
 
     /**
      * @var optionFactory
@@ -28,8 +28,8 @@ class IsVendorOptions extends \Magento\Eav\Model\Entity\Attribute\Source\Abstrac
     public function getAllOptions()
     {
         $this->_options = [
-            ['label' => __('Yes'), 'value' => self::VALUE_YES],
             ['label' => __('No'), 'value' => self::VALUE_NO],
+            ['label' => __('Yes'), 'value' => self::VALUE_YES],
         ];
         return $this->_options;
     }
