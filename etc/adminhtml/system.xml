@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<system>
+        <tab id="marketplace" translate="label" sortOrder="400">
+            <label>Marketplace</label>
+        </tab>
+        <section id="marketplace_account_approval" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>seperator-top</class>
+            <label>Account Approval</label>
+            <tab>marketplace</tab>
+            <resource>Amitshree_Marketplace::account_aproval</resource>
+            <group id="approval" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Customer account approval configuration</label>
+                <field id="approval_yes_no" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Customer Account approval is required by Admin?</label>
+                    <source_model>Amitshree\Marketplace\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+</system>
+</config>
