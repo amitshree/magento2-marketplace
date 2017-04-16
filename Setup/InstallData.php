@@ -1,10 +1,5 @@
 <?php
-/**
- * @author		Sashas
- * @category    Sashas
- * @package     Sashas_CustomerAttribute
- * @copyright   Copyright (c) 2015 Sashas IT Support Inc. (http://www.extensions.sashas.org)
- */
+
 namespace Amitshree\Marketplace\Setup;
 
 use Magento\Customer\Setup\CustomerSetupFactory;
@@ -15,11 +10,13 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
-/**
- * @codeCoverageIgnore
- */
+
 class InstallData implements InstallDataInterface
 {
+    /*
+     *  attribute to identify a customer is vendor or not
+     */
+    const IS_VENDOR = 'is_vendor';
 
     /**
      * @var CustomerSetupFactory
@@ -60,7 +57,7 @@ class InstallData implements InstallDataInterface
         $attributeSet = $this->attributeSetFactory->create();
         $attributeGroupId = $attributeSet->getDefaultGroupId($attributeSetId);
 
-        $customerSetup->addAttribute(Customer::ENTITY, 'is_vendor', [
+        $customerSetup->addAttribute(Customer::ENTITY, self::IS_VENDOR, [
             'type' => 'int',
             'label' => 'Is Vendor?',
             'input' => 'select',
@@ -74,7 +71,7 @@ class InstallData implements InstallDataInterface
             'system' => 0,
         ]);
 
-        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, 'is_vendor')
+        $attribute = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::IS_VENDOR)
             ->addData([
                 'attribute_set_id' => $attributeSetId,
                 'attribute_group_id' => $attributeGroupId,
