@@ -4,7 +4,6 @@ work in progress
 
 #### Features
 ```
-Allow customer to register as a vendor
+Allow customers to register as a vendor
 Vendor account approval by Admin
-
 ```
