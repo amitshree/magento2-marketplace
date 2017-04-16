@@ -1,4 +1,4 @@
-work in progress
+Work in progress. Please do not install it atm.
 
 # magento2-marketplace
 
