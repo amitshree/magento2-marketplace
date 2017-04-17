@@ -22,7 +22,7 @@ class Uninstall implements \Magento\Framework\Setup\UninstallInterface
 
         $entityTypeId = 1; // Find these in the eav_entity_type table
         $eavSetup->removeAttribute($entityTypeId, 'is_vendor');
-
+        $eavSetup->removeAttribute($entityTypeId, 'approve_account');
         $setup->endSetup();
 
     }
