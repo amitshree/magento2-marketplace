@@ -7,7 +7,7 @@ use Magento\Eav\Model\ResourceModel\Entity\Attribute\OptionFactory;
 
 use Magento\Framework\DB\Ddl\Table;
 
-class IsVendorOptions extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
+class CustomerYesNoOptions extends \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource
 {
     /**
      * Option values

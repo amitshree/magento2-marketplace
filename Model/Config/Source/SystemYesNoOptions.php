@@ -6,7 +6,7 @@
  */
 namespace Amitshree\Marketplace\Model\Config\Source;
 
-class Yesno implements \Magento\Framework\Option\ArrayInterface
+class SystemYesNoOptions implements \Magento\Framework\Option\ArrayInterface
 {
     /**
      * Options getter

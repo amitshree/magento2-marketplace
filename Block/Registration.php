@@ -14,7 +14,7 @@ class Registration extends Template
      */
     public function __construct(
         Context $context,
-        \Amitshree\Marketplace\Model\Config\Source\IsVendorOptions $isVendorOptions,
+        \Amitshree\Marketplace\Model\Config\Source\CustomerYesNoOptions $isVendorOptions,
         array $data
     )
     {

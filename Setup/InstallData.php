@@ -70,13 +70,13 @@ class InstallData implements InstallDataInterface
             'type' => 'int',
             'label' => 'Is Vendor?',
             'input' => 'select',
-            "source"   => "Amitshree\Marketplace\Model\Config\Source\IsVendorOptions",
+            "source"   => "Amitshree\Marketplace\Model\Config\Source\CustomerYesNoOptions",
             'required' => false,
             'default' => 0,
             'visible' => true,
             'user_defined' => true,
-            'sort_order' => 110,
-            'position' => 110,
+            'sort_order' => 210,
+            'position' => 210,
             'system' => 0,
         ]);
 
@@ -97,13 +97,13 @@ class InstallData implements InstallDataInterface
                 'type' => 'int',
                 'label' => 'Approve Account',
                 'input' => 'select',
-                "source"   => "Amitshree\Marketplace\Model\Config\Source\Yesno",
+                "source"   => "Amitshree\Marketplace\Model\Config\Source\CustomerYesNoOptions",
                 'required' => false,
                 'default' => 0,
                 'visible' => true,
                 'user_defined' => true,
-                'sort_order' => 111,
-                'position' => 111,
+                'sort_order' => 215,
+                'position' => 215,
                 'system' => 0,
             ]);
         $approve_account = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::APPROVE_ACCOUNT)

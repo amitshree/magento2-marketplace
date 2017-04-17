@@ -14,7 +14,7 @@
                 <label>Customer account approval configuration</label>
                 <field id="approval_yes_no" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Customer Account approval is required by Admin?</label>
-                    <source_model>Amitshree\Marketplace\Model\Config\Source\Yesno</source_model>
+                    <source_model>Amitshree\Marketplace\Model\Config\Source\SystemYesNoOptions</source_model>
                 </field>
             </group>
         </section>
