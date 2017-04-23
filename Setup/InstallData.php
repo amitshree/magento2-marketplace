@@ -2,6 +2,8 @@
 
 namespace Amitshree\Marketplace\Setup;
 
+use Magento\Eav\Setup\EavSetup;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Customer\Setup\CustomerSetupFactory;
 use Magento\Customer\Model\Customer;
 use Magento\Eav\Model\Entity\Attribute\Set as AttributeSet;
@@ -22,6 +24,13 @@ class InstallData implements InstallDataInterface
      * attribute to identify vendor account is approved or not
      */
     const APPROVE_ACCOUNT = 'approve_account';
+
+    /**
+     * @var EavSetupFactory
+     */
+    private $eavSetupFactory;
+
+
     /**
      * @var CustomerSetupFactory
      */
@@ -37,9 +46,11 @@ class InstallData implements InstallDataInterface
      * @param AttributeSetFactory $attributeSetFactory
      */
     public function __construct(
+        EavSetupFactory $eavSetupFactory,
         CustomerSetupFactory $customerSetupFactory,
         AttributeSetFactory $attributeSetFactory
     ) {
+        $this->eavSetupFactory = $eavSetupFactory;
         $this->customerSetupFactory = $customerSetupFactory;
         $this->attributeSetFactory = $attributeSetFactory;
     }
@@ -52,6 +63,50 @@ class InstallData implements InstallDataInterface
     {
         $setup->startSetup();
 
+        /**
+         *  Product attributes
+         */
+
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+
+        /**
+         *  remove vendor_id attribute
+         */
+        $eavSetup->removeAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'vendor_id');
+        /**
+         *  Create Vendor Id attribute
+         */
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'vendor_id',
+            [
+                'type' => 'int',
+                'backend' => '',
+                'frontend' => '',
+                'label' => 'Vendor Id',
+                'input' => '',
+                'class' => '',
+                'source' => '',
+                'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL,
+                'visible' => true,
+                'required' => false,
+                'user_defined' => true,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => false,
+                'unique' => false,
+                'apply_to' => ''
+            ]
+        );
+
+        /**
+         *  Customer attributes
+         */
         /** @var CustomerSetup $customerSetup */
         $customerSetup = $this->customerSetupFactory->create(['setup' => $setup]);
 

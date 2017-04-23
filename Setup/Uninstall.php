@@ -20,7 +20,16 @@ class Uninstall implements \Magento\Framework\Setup\UninstallInterface
 
         $eavSetup = $this->eavSetupFactory->create();
 
-        $entityTypeId = 1; // Find these in the eav_entity_type table
+        /**
+         * product attributes
+         */
+        $entityTypeId = 4; // Find these in the eav_entity_type table
+        $eavSetup->removeAttribute($entityTypeId, 'vendor_id');
+
+        /**
+         * customer attributes
+         */
+        $entityTypeId = 1;
         $eavSetup->removeAttribute($entityTypeId, 'is_vendor');
         $eavSetup->removeAttribute($entityTypeId, 'approve_account');
         $setup->endSetup();
