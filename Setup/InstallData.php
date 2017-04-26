@@ -127,12 +127,12 @@ class InstallData implements InstallDataInterface
             'input' => 'select',
             "source"   => "Amitshree\Marketplace\Model\Config\Source\CustomerYesNoOptions",
             'required' => false,
-            'default' => 0,
+            'default' => '0',
             'visible' => true,
             'user_defined' => true,
             'sort_order' => 210,
             'position' => 210,
-            'system' => 0,
+            'system' => false,
         ]);
 
         $is_vendor = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::IS_VENDOR)
@@ -154,12 +154,12 @@ class InstallData implements InstallDataInterface
                 'input' => 'select',
                 "source"   => "Amitshree\Marketplace\Model\Config\Source\CustomerYesNoOptions",
                 'required' => false,
-                'default' => 0,
+                'default' => '0',
                 'visible' => true,
                 'user_defined' => true,
                 'sort_order' => 215,
                 'position' => 215,
-                'system' => 0,
+                'system' => false,
             ]);
         $approve_account = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::APPROVE_ACCOUNT)
               ->addData([
