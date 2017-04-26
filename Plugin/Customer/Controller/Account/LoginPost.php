@@ -64,7 +64,7 @@ class LoginPost
                     if($is_vendor == 1 && $approve_account == 0)
                     {
                         $logger->info('inside');
-                        $this->messageManager->addErrorMessage('Your account is not approved. Kindly contact website admin for assitance.');
+                        $this->messageManager->addErrorMessage(__('Your account is not approved. Kindly contact website admin for assitance.'));
 
                         $this->responseHttp->setRedirect('customer/account/login');
 
