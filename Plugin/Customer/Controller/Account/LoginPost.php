@@ -5,6 +5,7 @@ use Magento\Customer\Model\Session;
 use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use  Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\App\Response\Http as ResponseHttp;
 
 
 class LoginPost
@@ -24,20 +25,25 @@ class LoginPost
     /** @var ManagerInterface **/
     protected $messageManager;
 
+    /** @var Http **/
+    protected $responseHttp;
+
     public function __construct(
         Session $customerSession,
         Validator $formKeyValidator,
         CustomerRepositoryInterface $customerRepositoryInterface,
-        ManagerInterface $messageManager
+        ManagerInterface $messageManager,
+        ResponseHttp $responseHttp
     )
     {
         $this->session = $customerSession;
         $this->formKeyValidator = $formKeyValidator;
         $this->customerRepositoryInterface = $customerRepositoryInterface;
         $this->messageManager = $messageManager;
+        $this->responseHttp = $responseHttp;
     }
 
-    public function beforeExecute(\Magento\Customer\Controller\Account\LoginPost $loginPost)
+    public function aroundExecute(\Magento\Customer\Controller\Account\LoginPost $loginPost, \Closure $proceed)
     {
 
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
@@ -59,11 +65,26 @@ class LoginPost
                     {
                         $logger->info('inside');
                         $this->messageManager->addErrorMessage('Your account is not approved. Kindly contact website admin for assitance.');
-                        die;
+
+                        $this->responseHttp->setRedirect('customer/account/login');
+
+                        //@todo:: redirect to last visited url
+                    }
+                    else {
+                        // call the original execute function
+                         return $proceed();
                     }
                 }
                 
             }
+            else {
+                // call the original execute function
+                return $proceed();
+                }
+        }
+        else {
+            // call the original execute function
+            return $proceed();
         }
     }
 }
