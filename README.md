@@ -2,8 +2,8 @@ Work in progress. Please do not install it atm.
 
 # magento2-marketplace
 
-```
 #### Installation process
+```
 composer config repositories.amit git git@github.com:amitshree/magento2-marketplace.git
 composer require amitshree-marketplace:dev-master
 php bin/magento setup:upgrade
