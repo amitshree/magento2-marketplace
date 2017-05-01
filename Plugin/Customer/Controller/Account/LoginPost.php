@@ -10,7 +10,8 @@ use Magento\Framework\App\Response\Http as ResponseHttp;
 
 class LoginPost
 {
-
+    const ZERO = 0;
+    const One =1;
     /**
      * @var Session
      */
@@ -61,7 +62,7 @@ class LoginPost
                     $is_vendor = $customer->getCustomAttribute('is_vendor')->getValue();
                     $approve_account = $customer->getCustomAttribute('approve_account')->getValue();
                      $logger->info('vendor'.$is_vendor.' approve_account'.$approve_account);
-                    if($is_vendor == 1 && $approve_account == 0)
+                    if($is_vendor == self::One && $approve_account == self::ZERO)
                     {
                         $logger->info('inside');
                         $this->messageManager->addErrorMessage(__('Your account is not approved. Kindly contact website admin for assitance.'));
