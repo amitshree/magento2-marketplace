@@ -53,9 +53,10 @@ class LoginPost
         $logger->info('before execute');
 
         if ($loginPost->getRequest()->isPost()) {
+            $logger->info('111');
             $login = $loginPost->getRequest()->getPost('login');
             if (!empty($login['username']) && !empty($login['password'])) {
-
+                $logger->info('222');
                 $customer = $this->customerRepositoryInterface->get($login['username']);
               
                 if(!empty($customer->getCustomAttributes())){
@@ -64,7 +65,7 @@ class LoginPost
                      $logger->info('vendor'.$is_vendor.' approve_account'.$approve_account);
                     if($is_vendor == self::One && $approve_account == self::ZERO)
                     {
-                        $logger->info('inside');
+                        $logger->info('is a vendor');
                         $this->messageManager->addErrorMessage(__('Your account is not approved. Kindly contact website admin for assitance.'));
 
                         $this->responseHttp->setRedirect('customer/account/login');
@@ -75,6 +76,10 @@ class LoginPost
                         // call the original execute function
                          return $proceed();
                     }
+                }
+                else {
+                    $logger->info('no custom attribute found');
+                    // if no custom attributes found
                 }
                 
             }

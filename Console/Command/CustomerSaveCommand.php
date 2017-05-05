@@ -58,7 +58,7 @@ class CustomerSaveCommand extends  Command
     {
         $this->state->setAreaCode('frontend');
         $customers = $this->customer->getCollection();
-        $customers->getSelect()->limit(1);
+       // $customers->getSelect()->limit(1);
 
         foreach($customers as $customer)
         {
