@@ -2,7 +2,9 @@
     <type name="Magento\Customer\Api\CustomerRepositoryInterface">
         <plugin name="CustomerRepositoryInterface::before" type="Amitshree\Marketplace\Plugin\Customer\Api\CustomerRepositoryInterface" />
     </type>
+    <preference for="Magento\Customer\Controller\Account\CreatePost"
+                type="Amitshree\Marketplace\Controller\Customer\Account\CreatePost" />
     <type name="Magento\Customer\Controller\Account\LoginPost">
-        <plugin name="CustomerAccountLogin::before" type="Amitshree\Marketplace\Plugin\Customer\Controller\Account\LoginPost" />
+        <plugin name="CustomerAccountLogin::around" type="Amitshree\Marketplace\Plugin\Customer\Controller\Account\LoginPost" />
     </type>
 </config>

@@ -1,6 +1,8 @@
 <?php
 
 namespace Amitshree\Marketplace\Plugin\Customer\Api;
+use Magento\Customer\Api\CustomerRepositoryInterface as CustomerRepository;
+use Magento\Customer\Api\Data\CustomerInterface;
 
 
 class CustomerRepositoryInterface
@@ -8,22 +10,20 @@ class CustomerRepositoryInterface
     /**
      * Check if customer applied to become a seller
      * @param \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository
-     * @param \Magento\Customer\Api\Data\CustomerInterface $customer
+     * @param CustomerInterface $customer
      * @param null $passwordHash
      * @return array
      */
-    public function beforeSave(\Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
-                               \Magento\Customer\Api\Data\CustomerInterface $customer,
-                               $passwordHash = null)
+    /*public function afterSave(CustomerRepository $subject, CustomerInterface $customer)
     {
        
-       /* $isVendor = $customerRepository->getById($customer->getId())->getCustomAttribute('is_vendor')->getValue();
+        $isVendor = $subject->getById($customer->getId())->getCustomAttribute('is_vendor')->getValue();
 
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
-        $logger->info('is vendor'. $isVendor);
-*/
-        return [$customer, $passwordHash];
-    }
+        $logger->info('is vendorrr'. $isVendor);
+
+        return $customer;
+    }*/
 }

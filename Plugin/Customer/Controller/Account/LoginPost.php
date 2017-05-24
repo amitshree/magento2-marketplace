@@ -50,7 +50,7 @@ class LoginPost
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
-        $logger->info('before execute');
+        $logger->info('before executeee');
 
         if ($loginPost->getRequest()->isPost()) {
             $logger->info('111');
@@ -74,10 +74,12 @@ class LoginPost
                     }
                     else {
                         // call the original execute function
+                        $logger->info('333');
                          return $proceed();
                     }
                 }
                 else {
+                    $logger->info('444');
                     $logger->info('no custom attribute found');
                     // if no custom attributes found
                 }
@@ -85,11 +87,13 @@ class LoginPost
             }
             else {
                 // call the original execute function
+                $logger->info('555');
                 return $proceed();
                 }
         }
         else {
             // call the original execute function
+            $logger->info('666');
             return $proceed();
         }
     }

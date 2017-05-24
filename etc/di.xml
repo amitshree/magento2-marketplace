@@ -10,7 +10,4 @@
     <type name="Magento\Customer\Api\CustomerRepositoryInterface">
         <plugin name="CustomerRepositoryInterface::before" type="Amitshree\Marketplace\Plugin\Customer\Api\CustomerRepositoryInterface" />
     </type>
-    <type name="Magento\Customer\Controller\Account\CreatePost">
-            <plugin name="CustomerAccountCreate::around" type="Amitshree\Marketplace\Plugin\Customer\Controller\Account\CreatePost" />
-    </type>
 </config>
