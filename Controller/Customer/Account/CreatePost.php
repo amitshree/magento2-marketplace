@@ -33,64 +33,6 @@ use Magento\Framework\Exception\InputException;
  */
 class CreatePost extends \Magento\Customer\Controller\Account\CreatePost
 {
-    /** @var AccountManagementInterface */
-    protected $accountManagement;
-
-    /** @var Address */
-    protected $addressHelper;
-
-    /** @var FormFactory */
-    protected $formFactory;
-
-    /** @var SubscriberFactory */
-    protected $subscriberFactory;
-
-    /** @var RegionInterfaceFactory */
-    protected $regionDataFactory;
-
-    /** @var AddressInterfaceFactory */
-    protected $addressDataFactory;
-
-    /** @var Registration */
-    protected $registration;
-
-    /** @var CustomerInterfaceFactory */
-    protected $customerDataFactory;
-
-    /** @var CustomerUrl */
-    protected $customerUrl;
-
-    /** @var Escaper */
-    protected $escaper;
-
-    /** @var CustomerExtractor */
-    protected $customerExtractor;
-
-    /** @var \Magento\Framework\UrlInterface */
-    protected $urlModel;
-
-    /** @var DataObjectHelper  */
-    protected $dataObjectHelper;
-
-    /**
-     * @var Session
-     */
-    protected $session;
-
-    /**
-     * @var AccountRedirect
-     */
-    private $accountRedirect;
-
-    /**
-     * @var \Magento\Framework\Stdlib\Cookie\CookieMetadataFactory
-     */
-    private $cookieMetadataFactory;
-
-    /**
-     * @var \Magento\Framework\Stdlib\Cookie\PhpCookieManager
-     */
-    private $cookieMetadataManager;
 
     /**
      * @param Context $context
@@ -225,10 +167,6 @@ class CreatePost extends \Magento\Customer\Controller\Account\CreatePost
         try {
             /** @var \Magento\Framework\App\RequestInterface $request */
             $isVendor = $this->getRequest()->getParam('is_vendor');
-            $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
-            $logger = new \Zend\Log\Logger();
-            $logger->addWriter($writer);
-            $logger->info('after exc'. $isVendor);
 
             $address = $this->extractAddress();
             $addresses = $address === null ? [] : [$address];

@@ -1,0 +1,9 @@
+<?php
+/* @var $block \Amitshree\Marketplace\Block\Vendor\AccountDetailsSidebar */
+?>
+<?php
+$marketplaceVendorHelper = $this->helper('Amitshree\Marketplace\Helper\Vendor');
+?>
+<?php if ($marketplaceVendorHelper->isVendorInfoAllowedInSidebar()) : ?>
+    <?php echo $this->escapeHtml($block->getTitle()); ?>
+<?php endif; ?>
