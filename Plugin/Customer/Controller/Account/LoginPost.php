@@ -10,8 +10,6 @@ use Magento\Framework\App\Response\Http as ResponseHttp;
 
 class LoginPost
 {
-    const ZERO = 0;
-    const One =1;
     /**
      * @var Session
      */
@@ -22,12 +20,14 @@ class LoginPost
 
     /** @var CustomerRepositoryInterface */
     protected $customerRepositoryInterface;
-    
+
     /** @var ManagerInterface **/
     protected $messageManager;
 
     /** @var Http **/
     protected $responseHttp;
+
+    protected $currentCustomer;
 
     public function __construct(
         Session $customerSession,
@@ -50,51 +50,64 @@ class LoginPost
         $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
-        $logger->info('before executeee');
+        $logger->info('before execute');
 
         if ($loginPost->getRequest()->isPost()) {
             $logger->info('111');
             $login = $loginPost->getRequest()->getPost('login');
             if (!empty($login['username']) && !empty($login['password'])) {
                 $logger->info('222');
-                $customer = $this->customerRepositoryInterface->get($login['username']);
-              
+                $customer = $this->getCustomer($login['username']);
+
                 if(!empty($customer->getCustomAttributes())){
-                    $is_vendor = $customer->getCustomAttribute('is_vendor')->getValue();
-                    $approve_account = $customer->getCustomAttribute('approve_account')->getValue();
-                     $logger->info('vendor'.$is_vendor.' approve_account'.$approve_account);
-                    if($is_vendor == self::One && $approve_account == self::ZERO)
+                    if($this->isAVendorAndAccountNotApproved($customer))
                     {
-                        $logger->info('is a vendor');
                         $this->messageManager->addErrorMessage(__('Your account is not approved. Kindly contact website admin for assitance.'));
-
                         $this->responseHttp->setRedirect('customer/account/login');
-
                         //@todo:: redirect to last visited url
                     }
                     else {
-                        // call the original execute function
-                        $logger->info('333');
-                         return $proceed();
+                        return $proceed();
                     }
                 }
                 else {
-                    $logger->info('444');
-                    $logger->info('no custom attribute found');
                     // if no custom attributes found
+                    return $proceed();
                 }
-                
+
             }
             else {
                 // call the original execute function
-                $logger->info('555');
                 return $proceed();
-                }
+            }
         }
         else {
             // call the original execute function
-            $logger->info('666');
             return $proceed();
         }
+    }
+
+    /**
+     * @param $email
+     * @return \Magento\Customer\Api\Data\CustomerInterface
+     */
+    public function getCustomer($email)
+    {
+        $this->currentCustomer = $this->customerRepositoryInterface->get($email);
+        return $this->currentCustomer;
+    }
+    /**
+     * Check if customer is a vendor and account is approved
+     * @return bool
+     */
+    public function isAVendorAndAccountNotApproved($customer)
+    {
+        $isVendor = $customer->getCustomAttribute('is_vendor')->getValue();
+        $isApprovedAccount = $customer->getCustomAttribute('approve_account')->getValue();
+        if($isVendor && !$isApprovedAccount)
+        {
+            return true;
+        }
+        return false;
     }
 }
