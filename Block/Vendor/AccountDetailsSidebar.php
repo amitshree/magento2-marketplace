@@ -9,7 +9,6 @@ class AccountDetailsSidebar extends Template
     /**
      * Registration constructor.
      * @param Context $context
-     * @param \Amitshree\Marketplace\Model\Config\Source\IsVendorOptions $isVendorOptions
      * @param array $data
      */
     public function __construct(
