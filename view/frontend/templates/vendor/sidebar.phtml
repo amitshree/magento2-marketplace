@@ -6,6 +6,9 @@ $marketplaceVendorHelper = $this->helper('Amitshree\Marketplace\Helper\Vendor');
 ?>
 <?php if ($marketplaceVendorHelper->isVendorInfoAllowedInSidebar()) : ?>
     <div class="vendor_sidebar_additional">
-        <?php echo $this->escapeHtml($block->getTitle()); ?>
+        <strong><?php /* @escapeNotVerified */ echo $block->getTitle(); ?></strong>
+        <div class="vendor_account_links">
+            <p><a href="<?php /* @escapeNotVerified */ echo $marketplaceVendorHelper->getVendorProfileUrl() ?>">Profile Info</a> </p>
+        </div>
     </div>
 <?php endif; ?>

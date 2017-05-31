@@ -29,6 +29,11 @@ class Vendor extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $_storeManager;
 
+    /**
+     * @var \Magento\Framework\UrlInterface
+     */
+    protected $urlBuilder;
+
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
@@ -40,11 +45,13 @@ class Vendor extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Customer\Model\Session $customerSession,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\UrlInterface $urlBuilder
     ) {
         $this->_coreRegistry = $coreRegistry;
         $this->_customerSession = $customerSession;
         $this->_storeManager = $storeManager;
+        $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
     }
 
@@ -105,5 +112,14 @@ class Vendor extends \Magento\Framework\App\Helper\AbstractHelper
             return true;
         }
         return false;
+    }
+
+    /**
+     *  Return vendor profile url
+     * @return mixed
+     */
+    public function getVendorProfileUrl()
+    {
+        return $this->urlBuilder->getUrl('marketplace/vendor/profile');
     }
 }

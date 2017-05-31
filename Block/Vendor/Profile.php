@@ -1,11 +1,12 @@
 <?php
-
 namespace Amitshree\Marketplace\Block\Vendor;
-use Magento\Framework\View\Element\Template;
+
 use Magento\Framework\View\Element\Template\Context;
 
-class AccountDetailsSidebar extends Template
+
+class Profile extends \Magento\Framework\View\Element\Template
 {
+
     /**
      * @param Context $context
      * @param array $data
@@ -18,14 +19,9 @@ class AccountDetailsSidebar extends Template
         parent::__construct($context, $data);
     }
 
-    /**
-     * Retrieve block title
-     *
-     * @return \Magento\Framework\Phrase
-     */
-    public function getTitle()
+    public function getAboutVendor()
     {
-        return __('Vendor Info');
+        //@todo:: return about vendor
+        return '';
     }
-
 }
