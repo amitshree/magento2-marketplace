@@ -1,6 +1,7 @@
 <?php
 
 namespace Amitshree\Marketplace\Plugin\Customer\Controller\Account;
+use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Customer\Api\CustomerRepositoryInterface;
@@ -29,12 +30,17 @@ class LoginPost
 
     protected $currentCustomer;
 
+    /** @var AccountManagementInterface */
+    protected $customerAccountManagement;
+
+
     public function __construct(
         Session $customerSession,
         Validator $formKeyValidator,
         CustomerRepositoryInterface $customerRepositoryInterface,
         ManagerInterface $messageManager,
-        ResponseHttp $responseHttp
+        ResponseHttp $responseHttp,
+        AccountManagementInterface $customerAccountManagement
     )
     {
         $this->session = $customerSession;
@@ -42,6 +48,7 @@ class LoginPost
         $this->customerRepositoryInterface = $customerRepositoryInterface;
         $this->messageManager = $messageManager;
         $this->responseHttp = $responseHttp;
+        $this->customerAccountManagement = $customerAccountManagement;
     }
 
     public function aroundExecute(\Magento\Customer\Controller\Account\LoginPost $loginPost, \Closure $proceed)
@@ -57,22 +64,27 @@ class LoginPost
             $login = $loginPost->getRequest()->getPost('login');
             if (!empty($login['username']) && !empty($login['password'])) {
                 $logger->info('222');
-                $customer = $this->getCustomer($login['username']);
-
-                if(!empty($customer->getCustomAttributes())){
-                    if($this->isAVendorAndAccountNotApproved($customer))
-                    {
-                        $this->messageManager->addErrorMessage(__('Your account is not approved. Kindly contact website admin for assitance.'));
-                        $this->responseHttp->setRedirect('customer/account/login');
-                        //@todo:: redirect to last visited url
-                    }
-                    else {
+                try {
+                    $customer = $this->getCustomer($login['username']);
+                    if (!empty($customer->getCustomAttributes())) {
+                        if ($this->isAVendorAndAccountNotApproved($customer)) {
+                            $this->messageManager->addErrorMessage(__('Your account is not approved. Kindly contact website admin for assitance.'));
+                            $this->responseHttp->setRedirect('customer/account/login');
+                            //@todo:: redirect to last visited url
+                        } else {
+                            return $proceed();
+                        }
+                    } else {
+                        // if no custom attributes found
                         return $proceed();
                     }
                 }
-                else {
-                    // if no custom attributes found
-                    return $proceed();
+                catch (\Exception $e)
+                {
+                    $message = "Invalid User credentials.";
+                    $this->messageManager->addError($message);
+                    $this->session->setUsername($login['username']);
+                    $this->responseHttp->setRedirect('customer/account/login');
                 }
 
             }
