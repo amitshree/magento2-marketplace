@@ -3,3 +3,7 @@
 ?>
 <!-- profile details -->
 
+<form action="<?php echo $block->escapeUrl($block->getSaveProfileUrl()) ?>">
+<p> <span>Your company name: </span> <input type="text" name="company"> </p>
+<input type="submit" name="Save" value="Save">
+</form>

@@ -24,4 +24,8 @@ class Profile extends \Magento\Framework\View\Element\Template
         //@todo:: return about vendor
         return '';
     }
+
+    public function getSaveProfileUrl() {
+        return $this->getUrl('marketplace/vendor/save');
+    }
 }
