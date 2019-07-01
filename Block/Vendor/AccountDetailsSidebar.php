@@ -28,4 +28,20 @@ class AccountDetailsSidebar extends Template
         return __('Vendor Info');
     }
 
+    /**
+     *  Return vendor profile url
+     * @return mixed
+     */
+    public function getVendorProfileUrl()
+    {
+        return $this->getUrl('marketplace/vendor/profile');
+    }
+
+    /**
+    * Manage products url
+    */
+    public function getProductsUrl() {
+        return $this->getUrl('marketplace/products/manage');
+    }
+
 }
