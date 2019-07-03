@@ -3,7 +3,11 @@
 ?>
 <!-- profile details -->
 
-<form action="<?php echo $block->escapeUrl($block->getSaveProfileUrl()) ?>">
-<p> <span>Your company name: </span> <input type="text" name="company"> </p>
-<input type="submit" name="Save" value="Save">
-</form>
+<div class="vendor_profile">
+	<form action="<?php echo $block->escapeUrl($block->getSaveProfileUrl()) ?>">
+		<p> <span>Your company name: </span> <input type="text" name="company"> </p>
+		<p><span>About your company:</span><textarea rows="4" cols="50" name="comment" form="usrform">
+Enter text here...</textarea></p>
+		<input type="submit" name="Save" value="Save">
+	</form>
+</div>
